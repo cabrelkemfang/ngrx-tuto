@@ -1,0 +1,71 @@
+<div class="test">
+  <button mat-raised-button color="primary" (click)="loadArticle()">Show All Articles</button>
+  <button mat-raised-button color="accent" (click)="createArticleView()">Create Article</button>
+  <button mat-raised-button color="warn" (click)="getArticleByIdView()">Search Article By Id</button>
+
+  <div [ngSwitch]="task">
+
+    <ng-template [ngSwitchCase]="'all'">
+      <p>All Product</p>
+      <ul *ngFor="let lst of articles; let i = index">
+        {{index}}
+        <li>{{lst.firstName}}</li>
+        <li>{{lst.lastName}}</li>
+        <li>{{lst.matricule}}</li>
+        <li>{{lst.email}}</li>
+      </ul>
+    </ng-template>
+
+    <ng-template [ngSwitchCase]="'create'">
+      <p>Create a product</p>
+        <mat-card-content>
+          <form #form="ngForm" (ngSubmit)="onSubmit(form.value)" >
+            <mat-form-field class="example-full-width">
+              <input matInput type="text" placeholder="First Name " name="firstName" required ngModel>
+              <mat-error>
+                Please the First Name is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput type="text" placeholder="Last Name " name="lastName" required ngModel>
+              <mat-error>
+                Please the Last Name is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput type="text" placeholder="Matricule Number" name="matricule" required ngModel>
+              <mat-error>
+                Please the Matricule Number is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput type="text" placeholder="Email" name="email" required ngModel>
+              <mat-error>
+                Please the Email is required
+              </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button class="color1" type="submit" [disabled]="!form.form.valid">Create</button>
+          </form>
+        </mat-card-content>
+
+    </ng-template>
+
+    <ng-template [ngSwitchCase]="'get'">
+      <p> Search Product</p>
+      <input matInput placeholder="Product ID" #product>
+      <button mat-raised-button (click)="search(product)" >Search</button>
+      <ul *ngFor="let lst of article">
+          <li>{{lst.firstName}}</li>
+          <li>{{lst.lastName}}</li>
+          <li>{{lst.matricule}}</li>
+          <li>{{lst.email}}</li>
+  
+        </ul>
+    </ng-template>
+  </div>
+
+</div>
